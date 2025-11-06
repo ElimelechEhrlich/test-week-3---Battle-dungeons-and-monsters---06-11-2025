@@ -21,5 +21,12 @@ class Player:
     def speak(self):
         print (f'my name is {self.name}, and my profession is {self.profession}')
 
-    def attack(self):
-        return f'{self.profession} attack'
+    def attack(self): 
+        if self.speed + rollspeed > monster.armor_rating:
+            print (f'{self.name}: injury!')
+            rolldamage = roll_dice(6)
+            damage = self.power + rolldamage
+            monster.hp -= damage
+        else:
+            print (f'{self.name}: miss..')
+            return
