@@ -25,6 +25,6 @@ class Orc:
                 damage = self.power + rolldamage
             player.hp -= damage
         else:
-            print (f'{current_player.name}: miss..')
+            print (f'{self.name}: miss..')
             return
     
