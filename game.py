@@ -51,19 +51,7 @@ class Game:
         while current_player.hp > 0 and rival.hp > 0:
             damage = 0
             rollspeed = self.roll_dice(20)
-            if current_player.speed + rollspeed > rival.armor_rating:
-                print (f'{current_player.name}: injury!')
-                rolldamage = self.roll_dice(6)
-                if current_player is Orc or current_player is Goblin:
-                    if current_player.weapon == 'knife':
-                        damage = current_player.power + rolldamage*0.5
-                    elif current_player.weapon == 'axe':
-                        damage = current_player.power + rolldamage*1.5
-                elif self.monster.weapon == 'sword' or current_player is Player:
-                    damage = current_player.power + rolldamage
-                rival.hp -= damage
-            else:
-                print (f'{current_player.name}: miss..')
+            current_player.attace()
             return self.battle(rival, current_player)
         if self.player.hp <= 0:
             print ('Death! game over!')
