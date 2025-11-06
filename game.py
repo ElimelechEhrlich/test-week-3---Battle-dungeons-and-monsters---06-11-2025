@@ -27,6 +27,10 @@ class Game:
         self.monster = (random.choice(Game.monsters))(monster_name)
         return self.monster.__dict__
     
+    def roll_dice(sides):
+        dice = random.randint(1,sides)
+        return dice
+    
     def battle(self):
         if self.choice == 'battle':
             player_name = str(input('your name: '))
@@ -68,9 +72,7 @@ class Game:
                     return
             return
     
-    def roll_dice(sides):
-        dice = random.randint(1,sides)
-        return dice
+
 
 
 
