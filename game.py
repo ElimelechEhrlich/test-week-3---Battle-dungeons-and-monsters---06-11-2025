@@ -67,14 +67,6 @@ class Game:
                     print ('Well done! you won!')
                     return
             return
- 
-                     
-              
-            
-                
-                    
-
-        # return f'{self.player} VS {self.monster}'
     
     def roll_dice(sides):
         dice = random.randint(1,sides)
