@@ -51,7 +51,7 @@ class Game:
         while current_player.hp > 0 and rival.hp > 0:
             damage = 0
             rollspeed = self.roll_dice(20)
-            current_player.attace()
+            current_player.attack()
             return self.battle(rival, current_player)
         if self.player.hp <= 0:
             print ('Death! game over!')
