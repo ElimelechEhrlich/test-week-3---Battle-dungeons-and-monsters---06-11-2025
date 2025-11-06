@@ -3,4 +3,4 @@ from game import Game
 if __name__=='__main__':
     current_game = Game()
     current_game.start()
-    current_game.battle()
+    current_game.play_game()

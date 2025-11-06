@@ -22,55 +22,57 @@ class Game:
     
     def create_player(self, player_name):
         self.player = Player(player_name)
+        return self.player
 
     def choose_random_monster(self, monster_name):
         self.monster = (random.choice(Game.monsters))(monster_name)
-        return self.monster.__dict__
+        return self.monster
     
     def roll_dice(self, sides):
         dice = random.randint(1,sides)
         return dice
     
-    def battle(self):
+    def play_game(self):
         if self.choice == 'battle':
             player_name = str(input('your name: '))
             monster_name = str(input('monster name: '))
-            self.create_player(player_name)
+            self.player = self.create_player(player_name)
             self.player.set_hp()
             self.player.set_power()
-            self.choose_random_monster(monster_name)
+            self.monster = self.choose_random_monster(monster_name)
             player_roll = self.player.speed + self.roll_dice(6)
             monster_roll = self.monster.speed + self.roll_dice(6)
             if monster_roll > player_roll:
-                while self.player.hp > 0 and self.monster.hp > 0:
-                    rollspeed = self.roll_dice(20)
-                    if self.monster.speed + rollspeed > self.player.armor_rating:
-                        print (f'{monster_name}: injury!')
-                        rolldamage = self.roll_dice(6)
-                        if self.monster.weapon == 'knife':
-                            damage = self.player.power + rolldamage*0.5
-                        elif self.monster.weapon == 'sword':
-                            damage = self.player.power + rolldamage
-                        else:
-                            damage = self.player.power + rolldamage*1.5
-                        self.player.hp -= damage
-                    else:
-                        print (f'{monster_name}: miss..')
-                    rollspeed = self.roll_dice(20)
-                    if (self.player.speed + rollspeed) > self.monster.armor_rating:
-                        print ('player: injury!')
-                        rolldamage = self.roll_dice(6)
-                        damage = self.monster.power + rolldamage
-                        self.monster.hp -= damage
-                    else:
-                        print ('player: miss..')
-                if self.player.hp <= 0:
-                    print ('Death! game over!')
-                    return
-                elif self.monster.hp <= 0:
-                    print ('Well done! you won!')
-                    return
+                return self.battle(self.monster, self.player)
+            else:
+                return self.battle(self.player, self.monster)
+    
+    def battle(self, current_player, rival ):
+        while current_player.hp > 0 and rival.hp > 0:
+            damage = 0
+            rollspeed = self.roll_dice(20)
+            if current_player.speed + rollspeed > rival.armor_rating:
+                print (f'{current_player.name}: injury!')
+                rolldamage = self.roll_dice(6)
+                if current_player is Orc or current_player is Goblin:
+                    if current_player.weapon == 'knife':
+                        damage = current_player.power + rolldamage*0.5
+                    elif current_player.weapon == 'axe':
+                        damage = current_player.power + rolldamage*1.5
+                elif self.monster.weapon == 'sword' or current_player is Player:
+                    damage = current_player.power + rolldamage
+                rival.hp -= damage
+            else:
+                print (f'{current_player.name}: miss..')
+            return self.battle(rival, current_player)
+        if self.player.hp <= 0:
+            print ('Death! game over!')
             return
+        elif self.monster.hp <= 0:
+            print ('Well done! you won!')
+            return
+
+
     
 
 
