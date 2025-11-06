@@ -27,7 +27,7 @@ class Game:
         self.monster = (random.choice(Game.monsters))(monster_name)
         return self.monster.__dict__
     
-    def roll_dice(sides):
+    def roll_dice(self, sides):
         dice = random.randint(1,sides)
         return dice
     
